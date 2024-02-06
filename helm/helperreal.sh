@@ -37,13 +37,19 @@ echo 'End point ready:' && echo $external_ip
 if helm status argocd >/dev/null 2>&1; then
   helm upgrade argocd ./argocd -n argocd
 else
-  helm install argocd ./argocd -n argocd
+  helm install argocd ./argocd -n argocd --create-namespace
 fi
 echo ArgoCD Installed/Upgraded
  sleep 30
- echo Sync Repo with Argo-CRD "Applicaiton"
+ echo Sync Repo with Argo-CRD "Application"
  kubectl apply -f ./argosetup.yml -n argocd
 
+if helm status keycloak >/dev/null 2>&1; then
+  helm upgrade keycloak ./keycloak -n keycloak
+else
+  helm install environment ./environment -n keycloak --create-namespace 
+fi
+echo Environment Installed/Upgraded
 # if helm status monitoring >/dev/null 2>&1; then
 #   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 #   helm upgrade monitoring ./monitoring -n monitoring

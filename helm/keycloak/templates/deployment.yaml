@@ -11,7 +11,7 @@ spec:
       targetPort: 8080
   selector:
     app: keycloak
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -24,6 +24,7 @@ spec:
   selector:
     matchLabels:
       app: keycloak
+  serviceName: keycloak
   template:
     metadata:
       labels:
@@ -31,8 +32,7 @@ spec:
     spec:
       containers:
         - name: keycloak
-          image: quay.io/keycloak/keycloak:23.0.6
-          args: ["start-dev"]
+          image: bitnami/keycloak:23.0.6
           env:
             - name: KEYCLOAK_ADMIN
               value: "admin"
@@ -40,6 +40,22 @@ spec:
               value: "admin"
             - name: KC_PROXY
               value: "edge"
+            # - name: PROXY_ADDRESS_FORWARDING
+            #   value: "true"
+            # - name: KEYCLOAK_HTTP_RELATIVE_PATH 
+            #   value: "/keycloak"
+            - name: KEYCLOAK_DATABASE_HOST
+              value: postgres
+            - name: KEYCLOAK_DATABASE_PORT
+              value: "5432"
+            - name: KEYCLOAK_DATABASE_NAME
+              value: postgres
+            - name: KEYCLOAK_DATABASE_SCHEMA
+              value: public
+            - name: KEYCLOAK_DATABASE_USER
+              value: keycloak
+            - name: KEYCLOAK_DATABASE_PASSWORD
+              value: keycloak
           ports:
             - name: http
               containerPort: 8080
