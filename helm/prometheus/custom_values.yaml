@@ -1,0 +1,13 @@
+prometheus:
+  enabled: true
+  persistence:
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
+alertmanager:
+  persistence:
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi

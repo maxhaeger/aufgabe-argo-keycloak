@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "webserver-deployment"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: nginx-webserver
+  template:
+    metadata:
+      labels:
+        component: nginx-webserver
+    spec:
+      containers:
+        - name: webserver
+          image: "nginx:latest"
+          ports:
+            - containerPort: 80
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nginx-webserver-service"
+spec:
+  selector:
+    component: nginx-webserver
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
