@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: keycloak-ingress
   namespace: keycloak
+  annotations:
+    alb.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   ingressClassName: nginx
   rules:

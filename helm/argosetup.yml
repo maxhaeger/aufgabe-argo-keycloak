@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: webserver
+  name: keycloak
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/maxhaeger/aufgabe-argo-keycloak
     targetRevision: master
-    path: helm/frontend
+    path: helm/keycloak
   destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+    server: https://kubernetes.keycloak.svc
+    namespace: keycloak
   # syncPolicy:
   #   automated: 
   #     prune: true

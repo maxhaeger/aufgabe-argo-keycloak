@@ -40,10 +40,10 @@ spec:
               value: "admin"
             - name: KC_PROXY
               value: "edge"
-            # - name: PROXY_ADDRESS_FORWARDING
-            #   value: "true"
-            # - name: KEYCLOAK_HTTP_RELATIVE_PATH 
-            #   value: "/keycloak"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KEYCLOAK_HTTP_RELATIVE_PATH 
+              value: "/keycloak"
             - name: KEYCLOAK_DATABASE_HOST
               value: postgres
             - name: KEYCLOAK_DATABASE_PORT
