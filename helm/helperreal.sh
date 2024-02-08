@@ -66,6 +66,7 @@ echo ArgoCD installiert/aktualisiert
 sleep 10
 
 # ArgoCD-Application-CRD installieren 
+# TODO: Featureflag als Parameter hinzufügen für syncPolicy
 echo Synchronisiere das Repository mit Argo-CRD "Application"
 
 kubectl apply -f ./argosetup.yml -n argocd

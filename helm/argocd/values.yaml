@@ -1,0 +1,6 @@
+oidc-config:
+  name: Keycloak
+  issuer: http://172.26.0.2/keycloak/realms/master
+  clientID: argocd
+  clientSecret: $oidc.keycloak.clientSecret
+  requestedScopes: ["openid", "profile", "email", "groups"]

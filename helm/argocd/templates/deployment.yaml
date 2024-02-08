@@ -20707,6 +20707,14 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
+data:
+  url: http://172.19.0.2/argocd
+  oidc.config: |
+    name: Keycloak
+    issuer: http://172.19.0.2/keycloak/realms/master
+    clientID: argocd
+    clientSecret: "OGhvdHVMbUZvRmxsMUNueUtNNm9RT3FMYTA4ekVEYWY="
+    requestedScopes: ["openid", "profile", "email", "groups"]
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -20740,6 +20748,9 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-rbac-cm
+data:
+  policy.csv: |
+    g, ArgoCDAdmins, role:admin
 ---
 apiVersion: v1
 data:
@@ -20792,6 +20803,8 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-secret
 type: Opaque
+data:
+  oidc.keycloak.clientSecret: OGhvdHVMbUZvRmxsMUNueUtNNm9RT3FMYTA4ekVEYWY=
 ---
 apiVersion: v1
 kind: Service
